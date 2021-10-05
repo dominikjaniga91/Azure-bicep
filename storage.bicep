@@ -7,14 +7,14 @@ var regions = [
   'northeurope'
 ]
 
-resource storage 'Microsoft.Storage/storageAccounts@2021-04-01' = [for (region,i) in regions: { // why do we nnned this line?
-  name: '${storageName}${i}'  //this name must globaly unique
+resource storage 'Microsoft.Storage/storageAccounts@2021-04-01' = { // why do we nnned this line?
+  name: storageName  //this name must globaly unique
   sku: { // what is the sku?
     name: 'Standard_LRS' // co to?
   }
   kind: 'StorageV2'
-  location: region
+  location: first(regions)
   properties: {
     accessTier: 'Hot'
   }
-}]
+}
