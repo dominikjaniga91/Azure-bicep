@@ -1,4 +1,5 @@
 var prefix = 'prod'
+var env = 'prod'
 var storageName = '${prefix}dominikjaniga05102021'
 
 var regions = [
@@ -7,7 +8,7 @@ var regions = [
   'northeurope'
 ]
 
-resource storage 'Microsoft.Storage/storageAccounts@2021-04-01' = { // why do we nnned this line?
+resource storage 'Microsoft.Storage/storageAccounts@2021-04-01' = if (env == 'test') { // why do we nnned this line?
   name: storageName  //this name must globaly unique
   sku: { // what is the sku?
     name: 'Standard_LRS' // co to?
@@ -18,3 +19,16 @@ resource storage 'Microsoft.Storage/storageAccounts@2021-04-01' = { // why do we
     accessTier: 'Hot'
   }
 }
+
+resource storage2 'Microsoft.Storage/storageAccounts@2021-04-01' = if (env == 'prod') { // why do we nnned this line?
+  name: storageName  //this name must globaly unique
+  sku: { // what is the sku?
+    name: 'Standard_LRS' // co to?
+  }
+  kind: 'StorageV2'
+  location: last(regions)
+  properties: {
+    accessTier: 'Hot'
+  }
+}
+
