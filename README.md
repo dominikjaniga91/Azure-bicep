@@ -1,3 +1,3 @@
 # Azure bicep
 
-Azure bicep script that that creates a basic recourse on Azure
+Azure bicep script that creates a basic recourse on Azure
